@@ -7,18 +7,17 @@ from pygame.locals import *
 
 # Constants
 
-SIZE = WIDTH, HEIGHT = 440, 300
-print(SIZE)
+SIZE = WIDTH, HEIGHT = 600, 600
 CELL_SIZE = CELL_WIDTH, CELL_HEIGHT = WIDTH // 3, HEIGHT // 3
-COLOR = (255, 255, 255)  # white line
+COLOR = (255, 192, 203)  # white line
 
 
 def draw_line(screen):
     # (object, color_code, start point, end point, thickness of line)
     for i in range(1, 3):  # draw 2 row lines
-        pygame.draw.line(screen, COLOR, (0, CELL_HEIGHT * i), (WIDTH, CELL_HEIGHT * i), (1))
+        pygame.draw.line(screen, COLOR, (0, CELL_HEIGHT * i), (WIDTH, CELL_HEIGHT * i), (2))
     for i in range(1, 3):  # draw 2 column lines
-        pygame.draw.line(screen, COLOR, (CELL_WIDTH * i, 0), (CELL_WIDTH * i, HEIGHT), (1))
+        pygame.draw.line(screen, COLOR, (CELL_WIDTH * i, 0), (CELL_WIDTH * i, HEIGHT), (2))
     pygame.display.update()
 
     return screen
@@ -100,21 +99,30 @@ def isEnd(map, type, screen):
     # Check rows and columns
     for i in range(3):
         if map[i][0] == map[i][1] == map[i][2] == type or map[0][i] == map[1][i] == map[2][i] == type:
-            end_message = "Player " + type + " WINS!"
+            if (type == "O"):
+              end_message = "Player " + "Asema" + " WINS!"
+            else:
+              end_message = "Player " + "Erkin" + " WINS!"
             end_text = myfont.render(end_message, True, COLOR)
             text_rect = end_text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
             screen.blit(end_text, text_rect)
             return True
 # Check left diagonal line
     if map[0][0] == map[1][1] == map[2][2] == type:
-        end_message = "Player " + type + " WINS!"
+        if (type == "O"):
+          end_message = "Player " + "Asema" + " WINS!"
+        else:
+          end_message = "Player " + "Erkin" + " WINS!"
         end_text = myfont.render(end_message, True, COLOR)
         text_rect = end_text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
         screen.blit(end_text, text_rect)
         return True
 # Check right diagonal line
     if map[0][2] == map[1][1] == map[2][0] == type:
-        end_message = "Player " + type + " WINS!"
+        if (type == "O"):
+          end_message = "Player " + "Asema" + " WINS!"
+        else:
+          end_message = "Player " + "Erkin" + " WINS!"
         end_text = myfont.render(end_message, True, COLOR)
         text_rect = end_text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
         screen.blit(end_text, text_rect)
